@@ -16,6 +16,8 @@ app = FastAPI(
 CATALOG_SERVICE_URL = os.getenv("CATALOG_SERVICE_URL", "http://localhost:8001")
 if CATALOG_SERVICE_URL and not CATALOG_SERVICE_URL.startswith("http://") and not CATALOG_SERVICE_URL.startswith("https://"):
     CATALOG_SERVICE_URL = f"https://{CATALOG_SERVICE_URL}"
+if CATALOG_SERVICE_URL and "localhost" not in CATALOG_SERVICE_URL and "catalog-service:8001" not in CATALOG_SERVICE_URL and ".onrender.com" not in CATALOG_SERVICE_URL:
+    CATALOG_SERVICE_URL = f"{CATALOG_SERVICE_URL}.onrender.com"
 
 class Order(BaseModel):
     id: int

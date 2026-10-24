@@ -15,6 +15,8 @@ app = FastAPI(
 ORDERS_SERVICE_URL = os.getenv("ORDERS_SERVICE_URL", "http://localhost:8002")
 if ORDERS_SERVICE_URL and not ORDERS_SERVICE_URL.startswith("http://") and not ORDERS_SERVICE_URL.startswith("https://"):
     ORDERS_SERVICE_URL = f"https://{ORDERS_SERVICE_URL}"
+if ORDERS_SERVICE_URL and "localhost" not in ORDERS_SERVICE_URL and "orders-service:8002" not in ORDERS_SERVICE_URL and ".onrender.com" not in ORDERS_SERVICE_URL:
+    ORDERS_SERVICE_URL = f"{ORDERS_SERVICE_URL}.onrender.com"
 
 class Space(BaseModel):
     id: int
